@@ -53,7 +53,7 @@ public class ExcelReader {
 	
 	public String getCellData(String sheetname, int rownum, String columnname)
 	{
-		int index = workbook.getSheetIndex(path);
+		int index = workbook.getSheetIndex(sheetname);
 		
 		String data;
 		

@@ -6,7 +6,7 @@ import com.crm.qa.testdata.ExcelReader;
 
 public class ExcelUtility {
 	
-	static String path="C:\\Users\\ADMIN\\Desktop\\Contacts.xlsx";
+	static String path="D:\\Selenium WorkSpace\\Mavenartifact\\src\\main\\java\\com\\crm\\qa\\testdata\\Contacts.xlsx";
 	
 	static ExcelReader ex = new ExcelReader(path);
 
@@ -24,27 +24,32 @@ public class ExcelUtility {
 		for(int i=2;i<=row;i++)
 		{
 			title = ex.getCellData(sheetname, i-1, "Title");
+			System.out.println(title);
 			
-			firstname = ex.getCellData(sheetname, i, "Firstname");
+			firstname = ex.getCellData(sheetname, i-1, "Firstname");
+			System.out.println(firstname);
 			
-			department = ex.getCellData(sheetname, i, "Department");
+			lastname = ex.getCellData(sheetname, i-1, "Lastname");
+			System.out.println(lastname);
 			
-			lastname = ex.getCellData(sheetname, i, "SecondName");
+			Phone = ex.getCellData(sheetname, i-1, "Phone");
+			System.out.println(Phone);
 			
-			Phone = ex.getCellData(sheetname, i, "Phone");
+			email = ex.getCellData(sheetname, i-1, "Email");
 			
-			email = ex.getCellData(sheetname, i, "Email");
+			Address = ex.getCellData(sheetname, i-1, "Address Title");
 			
-			Address = ex.getCellData(sheetname, i, "Address Title");
+			city = ex.getCellData(sheetname, i-1, "City");
 			
-			city = ex.getCellData(sheetname, i, "City");
+			State = ex.getCellData(sheetname, i-1, "State");
 			
-			State = ex.getCellData(sheetname, i, "State");
+			zipcode = ex.getCellData(sheetname, i-1, "Zipcode");
 			
-			zipcode = ex.getCellData(sheetname, i, "Zipcode");
+			department = ex.getCellData(sheetname, i-1, "Department");
+			System.out.println(department);
+			
+			ar.add(new Object[] {title,firstname,lastname,Phone,email,Address,city,State,zipcode,department});
 		}
-		
-		ar.add(new Object[] {title,firstname,department,lastname,Phone,email,Address,city,State,zipcode});
 		
 		return ar;
 	}

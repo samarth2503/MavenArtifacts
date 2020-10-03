@@ -22,6 +22,18 @@ public class ContactsTestCases extends BaseClass{
 	@DataProvider
 	public Iterator<Object[]> data(){
 		ArrayList<Object[]> al = ExcelUtility.getData();
+		
+		Iterator<Object[]> itr = al.iterator();
+		
+		while(itr.hasNext())
+		{
+			Object obj[] = itr.next();
+			for(Object o : obj)
+			{
+				System.out.println("Objects are "+o.toString());
+			}
+		}
+		
 		return al.iterator();
 		/* Iterator<Object[]> itr = al.iterator();					
 		can use this also but return type will be "Object[]"*/
@@ -29,9 +41,11 @@ public class ContactsTestCases extends BaseClass{
 	}
 	
 	@Test(dataProvider="data")
-	public void FillConatactDetaislTest(String title,String firstname,String Department,String SecondName,String Phone,String Email, String Address, String City,String State,String zipcode) throws InterruptedException
+	public void FillConatactDetaislTest(String title,String firstname,String lastname,String Phone,String Email,String Address, String City,String State,String zipcode,String department) throws InterruptedException
 	{
-		ct.AddContacts(title,firstname, Department, title, SecondName, Phone, Address, City, State, zipcode);
+		System.out.println("Data is "+title+"firstname is "+firstname);
+		//driver.switchTo().frame("leftpanel");
+		ct.AddContacts(title,firstname, lastname,Phone,Email,Address,City,State,zipcode,department);
 		
 		String text = ct.saveContact();
 		

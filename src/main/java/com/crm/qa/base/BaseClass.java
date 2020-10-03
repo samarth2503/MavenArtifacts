@@ -1,7 +1,6 @@
 package com.crm.qa.base;
 
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;
 import java.util.Properties;
@@ -15,13 +14,14 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.remote.CapabilityType;
-import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterClass;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
 
@@ -37,7 +37,7 @@ public class BaseClass {
 	public FileInputStream fis;
 	Actions ac;
 	protected LoginPage lp;
-	protected Contacts ct;
+	public Contacts ct; 
 	
 	public BaseClass() throws IOException
 	{
@@ -46,6 +46,7 @@ public class BaseClass {
 		prop= new Properties();
 		prop.load(fis);
 	}
+	
 	
 	
 	@Parameters({"browser","url"})
@@ -69,9 +70,13 @@ public class BaseClass {
 		
 		lp = new LoginPage();
 		ct=lp.login(prop.getProperty("username"),prop.getProperty("password"));
-		Thread.sleep(4000);
+		
+		driver.switchTo().frame("mainpanel");
+		
 		ct.navigateToContact();
+		
 	}
+	
 	
 	public WebElement getElement(String xpath)
 	{
@@ -81,13 +86,15 @@ public class BaseClass {
 		}
 		catch(Exception e)
 		{
-			System.out.println("No Such Element found");
+			System.out.println("No Such Element found "+xpath);
 			e.printStackTrace();
 		}
 		
 		return element;
 		
 	}
+	
+
 	
 	public void ClickObj(String xpath)
 	{
@@ -127,7 +134,7 @@ public class BaseClass {
 		}
 		catch(Exception e)
 		{
-			System.out.println("No such Element Exception");
+			System.out.println("No such Element Exception"+xpath);
 			e.printStackTrace();
 		}
 		
@@ -141,10 +148,10 @@ public class BaseClass {
 		return txt;
 	}
 	
+
 	public void ScrollDown(String xpath)
 	{
 		JavascriptExecutor js =(JavascriptExecutor) driver;
-		WebElement element=getElement(xpath);
 		js.executeScript("window.scrollTo(0,document.body.scrollHeight)");
 	}
 	
@@ -152,7 +159,7 @@ public class BaseClass {
 	{
 		ac = new Actions(driver);
 		WebElement element = driver.findElement(By.xpath(from));
-		ac.moveToElement(element).moveToElement(driver.findElement(By.xpath(to))).build().perform();
+		ac.moveToElement(element).moveToElement(driver.findElement(By.xpath(to))).click().perform();
 	}
 	
 	public void waitforVisibility(WebDriver driver,int time,String locator)
@@ -201,6 +208,8 @@ public class BaseClass {
 		}
 		
 	}
+	
+	
 	
 	@AfterClass
 	public void tearDown()
