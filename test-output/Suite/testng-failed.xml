@@ -3,18 +3,23 @@
 <suite guice-stage="DEVELOPMENT" name="Failed suite [Suite]">
   <listeners>
     <listener class-name="com.qa.crm.Listener.Listener"/>
+    <listener class-name="org.uncommons.reportng.HTMLReporter"/>
+    <listener class-name="org.uncommons.reportng.JUnitXMLReporter"/>
   </listeners>
-  <test thread-count="5" name="Test(failed)">
+  <test thread-count="5" name="Product(failed)">
     <parameter name="browser" value="chrome"/>
     <parameter name="url" value="https://classic.crmpro.com/index.html"/>
     <classes>
-      <class name="com.crm.qa.testcases.ContactsTestCases">
+      <class name="com.crm.qa.testcases.ProductTestcases">
         <methods>
-          <include name="FillConatactDetaislTest"/>
+          <include name="beforeTest"/>
           <include name="Initalize"/>
           <include name="tearDown"/>
+          <include name="addProduct" invocation-numbers="0"/>
+          <include name="afterMethod"/>
+          <include name="finish"/>
         </methods>
-      </class> <!-- com.crm.qa.testcases.ContactsTestCases -->
+      </class> <!-- com.crm.qa.testcases.ProductTestcases -->
     </classes>
-  </test> <!-- Test(failed) -->
+  </test> <!-- Product(failed) -->
 </suite> <!-- Failed suite [Suite] -->

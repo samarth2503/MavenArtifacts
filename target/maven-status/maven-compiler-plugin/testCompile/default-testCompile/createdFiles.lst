@@ -1,0 +1,6 @@
+com\crm\qa\testcases\HomePagetest.class
+com\crm\qa\testcases\ProductTestcases.class
+com\crm\qa\testcases\ContactsTestCases.class
+com\crm\qa\testcases\LoginPageTestcases.class
+com\crm\qa\testcases\TestRunner.class
+com\crm\qa\testcases\DealsTestCase.class

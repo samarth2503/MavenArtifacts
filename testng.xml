@@ -3,16 +3,29 @@
 <suite name="Suite">
 
 	<listeners>
-		<listener class-name="com.qa.crm.Listener.Listener"/>
-	</listeners>
+		<listener class-name="com.qa.crm.Listener.Listener" />
+		<listener class-name="org.uncommons.reportng.HTMLReporter" />
+		<listener class-name="org.uncommons.reportng.JUnitXMLReporter" />
+		<listener class-name="com.crm.qa.Analyzer.MyTransformer"/>
+</listeners>
+<!--  <test name="Contact">
+		<parameter name="browser" value="chrome" />
+		<parameter name="url"
+			value="https://classic.crmpro.com/index.html" />
+		<classes>
+			<class name="com.crm.qa.testcases.ContactsTestCases" />
+		</classes>
+	</test>   -->
 	
-  <test name="Test">
-  <parameter name="browser" value="chrome"/>
-  <parameter name="url" value="https://classic.crmpro.com/index.html"/>
-    <classes>
-      <class name="com.crm.qa.testcases.ContactsTestCases"/>
-    </classes>
-  </test> <!-- Test -->
+	
+	<test name="Product">
+		<parameter name="browser" value="chrome" />
+		<parameter name="url"
+			value="https://classic.crmpro.com/index.html" />
+		<classes>
+			<class name="com.crm.qa.testcases.DealsTestCase" />
+		</classes>
+	</test> 
 </suite> <!-- Suite -->
 
 

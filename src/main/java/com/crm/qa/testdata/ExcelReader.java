@@ -7,6 +7,7 @@ import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.testng.Reporter;
 
 public class ExcelReader {
 	
@@ -24,7 +25,7 @@ public class ExcelReader {
 		{
 			fis = new FileInputStream(path);
 			workbook = new XSSFWorkbook(fis);
-			sheet=workbook.getSheetAt(0);
+			//sheet=workbook.getSheetAt(0);
 		}
 		catch(Exception e)
 		{
@@ -34,17 +35,19 @@ public class ExcelReader {
 	
 	public int getRowCount(String sheetname)
 	{
+		
 		int index = workbook.getSheetIndex(sheetname);
+		
 		int rowCount;
 		if(index==-1)
 		{
 			rowCount=-1;
 		}
-		
 		else
 		{
 			sheet=workbook.getSheetAt(index);
 			rowCount=sheet.getLastRowNum();
+			System.out.println("Row count is : "+rowCount);
 		}
 		
 		return rowCount;
@@ -72,6 +75,7 @@ public class ExcelReader {
 			if(row.getCell(i).equals(columnname))
 			{
 				colcount=i;
+				System.out.println("Column count is: "+colcount);
 				break;
 			}
 			
@@ -90,13 +94,13 @@ public class ExcelReader {
 		}
 		
 		row=sheet.getRow(rownum);
-		
+		System.out.println("Row number is: "+row.toString()+"  "+rownum);
 		if(row==null)
 		{
 			return "";
 		}
 		cell=row.getCell(colcount);
-		
+		System.out.println("Row number is: "+cell.toString()+"   "+colcount);
 		if(cell==null)
 		{
 			return "";
@@ -106,9 +110,91 @@ public class ExcelReader {
 			data=cell.getStringCellValue();
 		}
 		
-		
+		System.out.println("Data is: "+data);
 		return data;
 		
+	}
+	
+	public String getCellData1(String sheetname,int colno,int rowno)
+	{
+		int index = workbook.getSheetIndex(sheetname);
+		String data="";
+		if(index==-1)
+		{
+			return data;
+		}
+		
+		if(isSheetExist(sheetname))
+		{
+			row=sheet.getRow(rowno);
+			if(row==null)
+			{
+				return data;
+			}
+			
+			cell = row.getCell(colno);
+			
+			if(cell==null)
+			{
+				return data;
+			}
+			
+			data+=row.getCell(colno).getStringCellValue();
+		}
+		else
+		{
+			return data;
+		}
+
+		return data;
+	}
+	
+	public int getColumncount(String sheetname)
+	{
+		int index = workbook.getSheetIndex(sheetname);
+		
+		if(!isSheetExist(sheetname))
+		{
+			return -1;
+		}
+		
+		sheet=workbook.getSheet(sheetname);
+		
+		row=sheet.getRow(0);
+		
+		if(row==null)
+		{
+			return -1;
+		}
+		
+		int column_count= row.getLastCellNum();
+		return column_count;
+	}
+	
+	public boolean isSheetExist(String sheetname)
+	{
+		int index = workbook.getSheetIndex(sheetname);
+		if(index==-1)
+		{
+			index = workbook.getSheetIndex(sheetname.toUpperCase());
+			if(index ==-1)
+			{
+				return false;
+			}
+			else
+			{
+				return true;
+			}
+		}
+		else
+		{
+			return true;
+		}
+	}
+	
+	public XSSFSheet getSheet()
+	{
+		return sheet;
 	}
 
 }

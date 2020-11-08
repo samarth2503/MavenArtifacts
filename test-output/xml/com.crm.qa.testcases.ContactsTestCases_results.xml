@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="Contact"
+           tests="3"
+           failures="0"
+           errors="0"
+           skipped="2"
+           time="0.632">
+  <properties />
+  
+            <testcase name="addContactTest" time="0.0" classname="com.crm.qa.testcases.ContactsTestCases">
+          <skipped />
+    </testcase>
+            <testcase name="deleteContacts" time="0.0" classname="com.crm.qa.testcases.ContactsTestCases">
+          <skipped />
+    </testcase>
+  
+            <testcase name="contactInfoTest" time="0.632" classname="com.crm.qa.testcases.ContactsTestCases" />
+      
+</testsuite>

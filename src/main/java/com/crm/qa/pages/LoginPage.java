@@ -46,12 +46,12 @@ public class LoginPage extends BaseClass{
 		return crnlogo.isDisplayed();
 	}
 	
-	public Contacts login(String un,String pwd) throws IOException
+	public HomePage login(String un,String pwd) throws IOException
 	{
 		username.sendKeys(un);
 		password.sendKeys(pwd);
 		loginBtn.click();
-		return new Contacts();
+		return new HomePage();
 	}
 
 }

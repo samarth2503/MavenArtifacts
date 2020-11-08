@@ -8,7 +8,9 @@ public class Constants {
 	
 	public static long PAGE_LOAD_TIMEOUT=120;
 	
-	public static long IMPLICIT_WAIT=30;
+	public static long IMPLICIT_WAIT=10;
+	
+	public static String path="D:\\Selenium WorkSpace\\Mavenartifact\\src\\main\\java\\com\\crm\\qa\\testdata\\DatProvider.xlsx";
 	
 
 }
